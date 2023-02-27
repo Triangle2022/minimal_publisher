@@ -124,7 +124,7 @@ class SBUSReceiver:
         self._protocol = None
 
     @staticmethod
-    async def create(port='/dev/ttyUSB2'):
+    async def create(port='/dev/ttyUSB0'):
         receiver = SBUSReceiver()
         receiver._transport, receiver._protocol = await serial_asyncio.create_serial_connection(
             asyncio.get_running_loop(),
@@ -145,7 +145,7 @@ async def main(args=None):
     rclpy.init(args=args)
 
     node = rclpy.create_node('joy')
-    sbus = await SBUSReceiver.create("/dev/ttyUSB2")
+    sbus = await SBUSReceiver.create("/dev/ttyUSB0")
 
     publisher = node.create_publisher(Joy, 'joy', 10)
 
